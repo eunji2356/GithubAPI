@@ -35,7 +35,16 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.Holder>() {
                 .into(binding.searchUserImg)
 
             binding.searchUser.text = item.login
+
+            binding.root.setOnClickListener {
+                onClickCallback?.invoke(item.login)
+            }
         }
+    }
+
+    var onClickCallback: ((String) -> Unit)? = null
+    fun setClickListener(callback: (String) -> Unit){
+        onClickCallback = callback
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = Holder(

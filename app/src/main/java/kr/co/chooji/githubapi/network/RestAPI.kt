@@ -4,6 +4,7 @@ import io.reactivex.Single
 import kr.co.chooji.githubapi.model.my.User
 import kr.co.chooji.githubapi.model.search.Search
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RestAPI {
@@ -14,4 +15,7 @@ interface RestAPI {
 
     @GET("user")
     fun getUser(): Single<User>
+
+    @GET("users/{username}")
+    fun getUserOne(@Path("username") userName: String): Single<User>
 }

@@ -1,9 +1,7 @@
 package kr.co.chooji.githubapi.ui.home
 
-import android.annotation.SuppressLint
-import android.content.Context
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +9,13 @@ import android.view.inputmethod.InputMethodManager
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kr.co.chooji.githubapi.R
 import kr.co.chooji.githubapi.adapter.SearchAdapter
 import kr.co.chooji.githubapi.databinding.FragmentHomeBinding
+import kr.co.chooji.githubapi.ui.searchDetail.SearchDetailActivity
 
 class HomeFragment: Fragment() {
 
@@ -64,6 +62,12 @@ class HomeFragment: Fragment() {
                     }
                 }
             })
+        }
+
+        adapter.setClickListener {
+            val intent = Intent(context, SearchDetailActivity::class.java)
+            intent.putExtra("userName", it)
+            startActivity(intent)
         }
     }
 

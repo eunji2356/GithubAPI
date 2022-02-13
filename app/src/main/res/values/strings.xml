@@ -7,4 +7,6 @@
 
     <!--  Search  -->
     <string name="search_result_none">검색 결과가 존재하지 않습니다.</string>
+    <string name="search_detail">결과 상세보기</string>
+
 </resources>

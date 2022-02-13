@@ -4,7 +4,9 @@
     <dimen name="layout_dp_0">0dp</dimen>
     <dimen name="layout_dp_10">10dp</dimen>
     <dimen name="layout_dp_12">12dp</dimen>
+    <dimen name="layout_dp_16">16dp</dimen>
     <dimen name="layout_dp_20">20dp</dimen>
+    <dimen name="layout_dp_24">24dp</dimen>
     <dimen name="layout_dp_30">30dp</dimen>
     <dimen name="layout_dp_40">40dp</dimen>
     <dimen name="layout_dp_50">50dp</dimen>
