@@ -83,6 +83,10 @@ class HomeFragment: Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
 
+        page = 1
+        search = ""
+        adapter.list.clear()
+
         _binding = null
     }
 }

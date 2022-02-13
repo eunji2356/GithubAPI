@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -10,7 +10,50 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="@dimen/layout_dp_50"
+        android:paddingBottom="@dimen/layout_dp_50">
+
+        <ImageView
+            android:id="@+id/user_img"
+            android:layout_width="@dimen/layout_dp_160"
+            android:layout_height="@dimen/layout_dp_160"
+            android:scaleType="centerCrop"
+            android:src="@mipmap/none_img"
+            app:layout_constraintVertical_chainStyle="packed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/user_name"/>
+
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_24"
+            android:textColor="@color/black"
+            android:includeFontPadding="false"
+            android:layout_marginTop="@dimen/layout_dp_20"
+            app:layout_constraintTop_toBottomOf="@id/user_img"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/user_bio"/>
+
+        <TextView
+            android:id="@+id/user_bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/text_size_16"
+            android:textColor="@color/black"
+            android:includeFontPadding="false"
+            android:textAlignment="center"
+            android:layout_marginTop="@dimen/layout_dp_12"
+            android:layout_marginLeft="@dimen/layout_dp_30"
+            android:layout_marginRight="@dimen/layout_dp_30"
+            app:layout_constraintTop_toBottomOf="@id/user_name"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

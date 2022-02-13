@@ -11,4 +11,7 @@ interface RestAPI {
     fun getSearchUser(@Query("q") q: String,
                       @Query("page") page: Int,
                       @Query("per_page") perPage:Int): Single<Search>
+
+    @GET("user")
+    fun getUser(): Single<User>
 }
