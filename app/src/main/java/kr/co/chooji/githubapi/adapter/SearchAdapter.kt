@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import kr.co.chooji.githubapi.R
 import kr.co.chooji.githubapi.databinding.ItemSearchUserBinding
 import kr.co.chooji.githubapi.model.search.SearchUser
@@ -27,6 +29,7 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.Holder>() {
 
             Glide.with(binding.searchUserImg.context)
                 .load(item.avatarUrl)
+                .transform(CenterCrop(), RoundedCorners(10))
                 .into(binding.searchUserImg)
 
             binding.searchUser.text = item.login

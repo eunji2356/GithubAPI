@@ -1,9 +1,12 @@
 package kr.co.chooji.githubapi.ui.home
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -20,22 +23,32 @@ class HomeFragment: Fragment() {
     private lateinit var viewModel: HomeViewModel
     private val adapter = SearchAdapter()
 
+    private var page: Int = 1
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
     : View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
 
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
+        initView()
+        observerViewModel()
+
+        return binding.root
+    }
+
+    private fun initView(){
+        binding.searchBtn.setOnClickListener {
+            viewModel.getSearchUser("${binding.searchEditText.text}", page)
+
+            val imm = ContextCompat.getSystemService(view!!.context, InputMethodManager::class.java)
+            imm?.hideSoftInputFromWindow(view!!.windowToken, 0)
+        }
+
         binding.searchRecycler.also {
             it.layoutManager = LinearLayoutManager(context)
             it.adapter = this.adapter
         }
-
-        viewModel.getSearchUser("eunji", 1)
-
-        observerViewModel()
-
-        return binding.root
     }
 
     private fun observerViewModel(){
