@@ -17,8 +17,10 @@ class SearchAdapter: RecyclerView.Adapter<SearchAdapter.Holder>() {
     var list: MutableList<SearchUser> = mutableListOf()
 
     @SuppressLint("NotifyDataSetChanged")
-    fun updateUserList(userList: MutableList<SearchUser>){
-        list.clear()
+    fun updateUserList(page: Int, userList: MutableList<SearchUser>){
+        if(page == 1) {
+            list.clear()
+        }
         list.addAll(userList)
         notifyDataSetChanged()
     }
