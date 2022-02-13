@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GithubAPI</string>
+
+    <!-- Menu Tab -->
+    <string name="menu_home">홈</string>
+    <string name="menu_my">내정보</string>
+</resources>
