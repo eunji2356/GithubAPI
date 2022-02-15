@@ -10,20 +10,20 @@ object RetrofitService {
 
     private const val BASE_URL = "https://api.github.com/"
 
-    var api: RestAPI
-
-    init {
-        val okHttpClient = OkHttpClient.Builder()
+    private val okHttpClient by lazy {
+        OkHttpClient.Builder()
             .addInterceptor(AppInterceptor())
             .build()
+    }
 
-        val retrofit = Retrofit.Builder()
+    private val retrofit: Retrofit by lazy {
+        Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
-        api = retrofit.create(RestAPI::class.java)
     }
+
+    fun getGithubAPI(): RestAPI = retrofit.create(RestAPI::class.java)
 }

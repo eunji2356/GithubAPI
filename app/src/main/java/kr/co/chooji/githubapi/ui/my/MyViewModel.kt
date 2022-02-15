@@ -15,7 +15,7 @@ class MyViewModel: ViewModel() {
     var userInfo = MutableLiveData<User>()
 
     fun getUser(){
-        disposable.add(RetrofitService.api.getUser()
+        disposable.add(RetrofitService.getGithubAPI().getUser()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ res ->

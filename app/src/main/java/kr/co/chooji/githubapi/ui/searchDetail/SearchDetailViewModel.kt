@@ -15,7 +15,7 @@ class SearchDetailViewModel: ViewModel() {
     var userInfo = MutableLiveData<User>()
 
     fun getUserOne(userName: String){
-        disposable.add(RetrofitService.api.getUserOne(userName)
+        disposable.add(RetrofitService.getGithubAPI().getUserOne(userName)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ res ->

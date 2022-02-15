@@ -1,6 +1,5 @@
 package kr.co.chooji.githubapi.ui.home
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -23,7 +22,7 @@ class HomeViewModel: ViewModel() {
     var userList = MutableLiveData<MutableList<SearchUser>>()
 
     fun getSearchUser(search:String, page: Int){
-        disposable.add(RetrofitService.api.getSearchUser(search, page, PER_PAGE)
+        disposable.add(RetrofitService.getGithubAPI().getSearchUser(search, page, PER_PAGE)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ res ->
