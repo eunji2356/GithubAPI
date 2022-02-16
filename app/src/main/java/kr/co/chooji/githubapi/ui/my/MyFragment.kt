@@ -12,6 +12,7 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import kr.co.chooji.githubapi.R
 import kr.co.chooji.githubapi.databinding.FragmentMyBinding
+import kr.co.chooji.githubapi.repository.MyRepository
 
 class MyFragment: Fragment() {
 
@@ -20,11 +21,13 @@ class MyFragment: Fragment() {
 
     private lateinit var myViewModel: MyViewModel
 
+    private val viewModelFactory get() = MyViewModelFactory(MyRepository())
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
     : View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_my, container, false)
 
-        myViewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+        myViewModel = ViewModelProvider(this, viewModelFactory).get(MyViewModel::class.java)
         myViewModel.getUser()
 
         observeViewModel()

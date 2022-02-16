@@ -7,15 +7,16 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kr.co.chooji.githubapi.model.my.User
 import kr.co.chooji.githubapi.network.RetrofitService
+import kr.co.chooji.githubapi.repository.MyRepository
 
-class MyViewModel: ViewModel() {
+class MyViewModel(private val repository: MyRepository): ViewModel() {
 
     private var disposable: CompositeDisposable = CompositeDisposable()
 
     var userInfo = MutableLiveData<User>()
 
     fun getUser(){
-        disposable.add(RetrofitService.getGithubAPI().getUser()
+        disposable.add(repository.getUser()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ res ->

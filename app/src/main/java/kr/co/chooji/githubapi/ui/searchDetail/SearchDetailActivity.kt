@@ -10,16 +10,19 @@ import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import kr.co.chooji.githubapi.R
 import kr.co.chooji.githubapi.databinding.ActivitySearchDetailBinding
+import kr.co.chooji.githubapi.repository.SearchDetailRepository
 
 class SearchDetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchDetailBinding
     private lateinit var viewModel: SearchDetailViewModel
 
+    private val viewModelFactory get() = SearchDetailViewModelFactory(SearchDetailRepository())
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel = ViewModelProvider(this).get(SearchDetailViewModel::class.java)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(SearchDetailViewModel::class.java)
 
         binding = ActivitySearchDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
