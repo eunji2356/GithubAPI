@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import kr.co.chooji.githubapi.R
 import kr.co.chooji.githubapi.adapter.SearchAdapter
 import kr.co.chooji.githubapi.databinding.FragmentHomeBinding
+import kr.co.chooji.githubapi.repository.HomeRepository
 import kr.co.chooji.githubapi.ui.searchDetail.SearchDetailActivity
 
 class HomeFragment: Fragment() {
@@ -28,10 +29,12 @@ class HomeFragment: Fragment() {
     private var page: Int = 1
     private var search: String = ""
 
+    private val viewModelFactory get() = HomeViewModelFactory(HomeRepository())
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?)
     : View {
         _binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
-        homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
+        homeViewModel = ViewModelProvider(this, viewModelFactory).get(HomeViewModel::class.java)
 
         initView()
         observerViewModel()

@@ -3,6 +3,7 @@ package kr.co.chooji.githubapi
 import android.os.Build
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kr.co.chooji.githubapi.network.RestAPI
+import kr.co.chooji.githubapi.repository.HomeRepository
 import okhttp3.HttpUrl
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
@@ -18,7 +19,7 @@ import java.net.HttpURLConnection
 
 @RunWith(AndroidJUnit4::class)
 @Config(sdk = [Build.VERSION_CODES.Q])
-internal class HomeViewModelTest {
+internal class HomeRepositoryTest {
 
     private lateinit var server: MockWebServer
     private lateinit var mockUrl: HttpUrl
@@ -35,6 +36,8 @@ internal class HomeViewModelTest {
         retrofit.create(RestAPI::class.java)
     }
 
+    private val repository = HomeRepository()
+
     @Before
     fun setup(){
         System.setProperty("javax.net.ssl.trustStore", "NONE")
@@ -45,20 +48,17 @@ internal class HomeViewModelTest {
 
     @Test
     fun `getSearchUser API`(){
+        val jsonFile = javaClass.classLoader.getResource("search_user.json").readText()
         val mockResponse = MockResponse().apply {
             setResponseCode(HttpURLConnection.HTTP_OK)
-            //TODO json 파일
-            setBody("{}")
+            setBody(jsonFile)
         }
         server.enqueue(mockResponse)
-        println(">>>>> body : $mockResponse")
 
-        api.getSearchUser("eunji", 1, 10)
+        repository.mockSearchUser(api, "eunji")
             .test()
-            .assertValue { value ->
-                println("value : $value")
-                true
-            }
+            .assertValue { it.items.size == 10 }
+            .assertValue { it.items[0].login.contains("eunji", true) }
             .assertComplete()
             .assertNoErrors()
     }

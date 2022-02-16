@@ -7,12 +7,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import kr.co.chooji.githubapi.model.search.SearchUser
 import kr.co.chooji.githubapi.network.RetrofitService
+import kr.co.chooji.githubapi.repository.HomeRepository
 
-class HomeViewModel: ViewModel() {
-
-    companion object{
-        const val PER_PAGE = 10
-    }
+class HomeViewModel(private val repository: HomeRepository): ViewModel() {
 
     private var disposable: CompositeDisposable = CompositeDisposable()
 
@@ -22,7 +19,7 @@ class HomeViewModel: ViewModel() {
     var userList = MutableLiveData<MutableList<SearchUser>>()
 
     fun getSearchUser(search:String, page: Int){
-        disposable.add(RetrofitService.getGithubAPI().getSearchUser(search, page, PER_PAGE)
+        disposable.add(repository.getSearchUser(search, page)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ res ->
