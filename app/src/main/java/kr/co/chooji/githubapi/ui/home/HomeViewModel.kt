@@ -1,5 +1,6 @@
 package kr.co.chooji.githubapi.ui.home
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -13,10 +14,10 @@ class HomeViewModel(private val repository: HomeRepository): ViewModel() {
 
     private var disposable: CompositeDisposable = CompositeDisposable()
 
-    var isNotEmpty =  MutableLiveData<Boolean>().apply {
+    val isNotEmpty =  MutableLiveData<Boolean>().apply {
         value = false
     }
-    var userList = MutableLiveData<MutableList<SearchUser>>()
+    val userList = MutableLiveData<MutableList<SearchUser>>()
 
     fun getSearchUser(search:String, page: Int){
         disposable.add(repository.getSearchUser(search, page)

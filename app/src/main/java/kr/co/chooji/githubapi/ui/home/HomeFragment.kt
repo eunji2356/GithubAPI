@@ -27,7 +27,7 @@ class HomeFragment: Fragment() {
     private val adapter = SearchAdapter()
 
     private var page: Int = 1
-    private var search: String = ""
+    var search: String = ""
 
     private val viewModelFactory get() = HomeViewModelFactory(HomeRepository())
 
@@ -43,6 +43,8 @@ class HomeFragment: Fragment() {
     }
 
     private fun initView(){
+        binding.lifecycleOwner = viewLifecycleOwner
+
         binding.searchBtn.setOnClickListener {
             binding.searchRecycler.scrollToPosition(0)
 
@@ -92,7 +94,10 @@ class HomeFragment: Fragment() {
 
         page = 1
         search = ""
-        adapter.list.clear()
+        adapter.list = mutableListOf()
+
+        homeViewModel.isNotEmpty.value = false
+        homeViewModel.userList.value = mutableListOf()
 
         _binding = null
     }
